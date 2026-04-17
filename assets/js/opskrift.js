@@ -8,7 +8,7 @@ function getAllPosts() {
     fetch(baseUrl + postsUrl)
         .then(res => res.json())
         .then(data => {
-            console.log('data:', data)
+            renderRecipe(data);
         })
         .catch(err => console.log("FEJL!", err))
 }
@@ -35,11 +35,11 @@ console.log(searchParams.get("foo"));
 
 
 if (window.location.pathname.includes("recipe")) {
-    const slug = searchParams.get("slug");
-    console.log("slug:", slug);
-    async function getPostBySlug(slug) {
+    const slug = searchParams.get("id");
+    console.log("id:", id);
+    async function getPostById(id) {
         try {
-            const res = await fetch(baseUrl + postsUrl + "?acf_format=standard&slug=" + slug, {
+            const res = await fetch(baseUrl + postsUrl + "?acf_format=standard&id=" + id, {
 
             })
             const posts = await res.json();
@@ -49,19 +49,20 @@ if (window.location.pathname.includes("recipe")) {
         }
 
     }
-    getPostBySlug(slug).then((sko) => renderRecipe(sko));
+    getPostById(id).then((sko) => renderRecipe(sko));
 }
 
 
-function renderRecipe(posts) {
+
+function renderRecipe(post) {
 
 
     const containerEl = document.querySelector(".container");
     containerEl.innerHTML = "";
 
-    console.log('posts', posts);
+    console.log('post', post);
 
-    posts.forEach(post => {
+    post.forEach(post => {
 
         let ingredients = [];
         for (const key in post.acf.ingredienser) {
@@ -74,19 +75,21 @@ function renderRecipe(posts) {
         console.log('ingredients:', ingredients)
         containerEl.innerHTML +=
             `<article>
-            <h2>${posts.acf.titel}</h2>
-  <img src="${posts.acf.primaert_billede.sizes.medium_large}"></img>
-  <p>${posts.acf.beskrivelse}</p>
+            <h2>${post.acf.titel}</h2>
+  <img src="${post.acf.primaert_billede.sizes.medium_large}"></img>
+  <p>${post.acf.beskrivelse}</p>
   <h2>Ingredienser:</h2>
   <ul>
       ${ingredients.map(ing => `<li>${ing}</li>`).join("")}
   </ul>
-  <p class="author">${posts.acf.forfatter[0].post_title}</p>
-  <button><a href="recipe.html?&slug=${posts.slug}">Læs mere</a></button>
+  <p class="author">${post.acf.forfatter[0].post_title}</p>
+  <button><a href="recipe.html?&slug=${post.slug}">Læs mere</a></button>
 </article>`
     })
 
 }
+
+
 
 
 

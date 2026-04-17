@@ -212,11 +212,19 @@ footer {
 /* Morten start her */
 
 /* Freja start her */
-
-/* Breadcrumb */
 .breadcrumb ul {
     display: flex;
     list-style: none;
+    gap: var(--smallGap);
+    align-items: center;
+    justify-content: center;
     font-family: var(--subFont);
-    gap: var(--largeGap);
+    font-size: small;
+
+    li {
+        background: var(--darkBlue);
+        padding: 8px;
+        color: var(--white);
+        border-radius: 12px;
+    }
 }
