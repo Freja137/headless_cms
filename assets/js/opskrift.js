@@ -9,7 +9,6 @@ function getAllPosts() {
         .then(res => res.json())
         .then(data => {
             console.log('data:', data)
-            /* renderRecipe(data); */
         })
         .catch(err => console.log("FEJL!", err))
 }
@@ -29,7 +28,7 @@ async function getAllPostsByCategory(id) {
     }
 }
 
-/* const paramsString = window.location.search;
+const paramsString = window.location.search;
 console.log('window.location:', window.location)
 const searchParams = new URLSearchParams(paramsString);
 console.log(searchParams.get("foo"));
@@ -88,6 +87,6 @@ function renderRecipe(posts) {
     })
 
 }
- */
+
 
 
