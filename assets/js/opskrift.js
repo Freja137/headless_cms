@@ -1,6 +1,6 @@
 const baseUrl = "https://test.albertefriis.dk/wp-json/";
 const postsUrl = "wp/v2/posts/?per_page=100&acf_format=standard";
-
+/* 
 const params = new URLSearchParams(window.location.search);
 
 
@@ -90,6 +90,5 @@ function renderRecipe(post) {
 }
 
 
-
-
+ */
 

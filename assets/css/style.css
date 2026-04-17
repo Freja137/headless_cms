@@ -215,11 +215,13 @@ footer {
 .breadcrumb ul {
     display: flex;
     list-style: none;
-    gap: var(--smallGap);
+    gap: 15px;
     align-items: center;
     justify-content: center;
     font-family: var(--subFont);
-    font-size: small;
+    font-size: x-small;
+    padding: var(--largeGap) 0;
+    margin: 0;
 
     li {
         background: var(--darkBlue);
@@ -227,4 +229,6 @@ footer {
         color: var(--white);
         border-radius: 12px;
     }
+
+
 }
