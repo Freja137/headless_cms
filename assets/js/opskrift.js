@@ -160,15 +160,26 @@ function renderRecipe(post) {
 
         containerEl.innerHTML +=
             `<article>
-            <h2>${post.acf.titel}</h2>
-  <img src="${post.acf.primaert_billede.sizes.medium_large}"></img>
-  <p>${post.acf.beskrivelse}</p>
+            <h2 class = "titelRecipe">${post.acf.titel}</h2>
+                <img src="${post.acf.primaert_billede.sizes.medium_large}" class = "image-Recipe"></img>
+                <p>${post.acf.beskrivelse}</p>
+            <div class="ikoner">
+                <span><i class="fa-regular fa-bookmark"></i> Gem</span>
+                <span><i class="fa-solid fa-plus"></i> Føj til indkøbsliste</span>
+            </div>
+            <div class = "filter-icons">
+                <span><i class="fa-regular fa-clock" id = "cookingtime"></i>30 - 45 min</span>
+                <span><i class="fa-regular fa-user" id = "servings"></i>2 pers</span>
+                <span><img src="../assets/img/chef_hat.png" class = "chef-hat"> Øvet</img></span>
+            </div>
   <h2>Ingredienser:</h2>
   <ul>
       ${ingredients.map(ing => `<li>${ing}</li>`).join("")}
   </ul>
   ${stepsHtml}
   <p class="author">${post.acf.forfatter?.[0]?.post_title ?? ""}</p>
+  <button class = "print-recipe"><i class="fa-solid fa-print"></i>Udskriv</button>
+
 </article>`
     })
 
