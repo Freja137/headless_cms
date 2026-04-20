@@ -1,0 +1,133 @@
+R
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./assets/js/opskrift.js" defer></script>
+    <script src="./assets/js/app.js" defer></script>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <header class="header-nav">
+        <a href="index.html" class="name">
+            Det Lille Køkken
+        </a>
+        <nav>
+            <ul class="nav-list">
+                <li class="dropdown">
+                    <button class="dropdown-toggle" type="button">
+                        Måltid
+                        <i class="fa-solid fa-angle-down"></i>
+                    </button>
+
+                    <!-- DROPDOWN MENU -->
+                    <nav class="nav-dropdown">
+                        <ul>
+                            <li><a href="#">Morgenmad</a></li>
+                            <li><a href="#">Frokost</a></li>
+                            <li><a href="#">Aftensmad</a></li>
+                            <li><a href="#">Forret</a></li>
+                            <li><a href="#">Hovedret</a></li>
+                            <li><a href="#">Dessert</a></li>
+                            <li><a href="#">Snacks</a></li>
+                        </ul>
+                    </nav>
+                </li>
+                <li class="dropdown">
+                    <button class="dropdown-toggle" type="button">
+                        Sæson
+                        <i class="fa-solid fa-angle-down"></i>
+                    </button>
+
+                    <!-- DROPDOWN MENU -->
+                    <nav class="nav-dropdown">
+                        <ul>
+                            <li><a href="#">Forår</a></li>
+                            <li><a href="#">Sommer</a></li>
+                            <li><a href="#">Efterår</a></li>
+                            <li><a href="#">Vinter</a></li>
+                        </ul>
+                    </nav>
+                </li>
+                <li class="dropdown">
+                    <button class="dropdown-toggle" type="button">
+                        Tid
+                        <i class="fa-solid fa-angle-down"></i>
+                    </button>
+                    <!-- DROPDOWN MENU -->
+                    <nav class="nav-dropdown">
+                        <ul>
+                            <li><a href="#">0-15min</a></li>
+                            <li><a href="#">15-30min</a></li>
+                            <li><a href="#">30-45min</a></li>
+                            <li><a href="#">45-60min</a></li>
+                            <li><a href="#">60min +</a></li>
+                        </ul>
+                    </nav>
+                </li>
+                <li>
+                    <a href="opskrifter.html" class="nav-link-btn">Opskrifter</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <nav class="breadcrumb">
+            <ul>
+                <li>Morgenmad</li>
+                <li>Glutenallergi</li>
+                <li>Nøddeallergi</li>
+                <li>Skaldyrsallergi</li>
+                <li>0-15 min</li>
+            </ul>
+        </nav>
+        <article class="container">
+
+        </article>
+    </main>
+    <footer>
+        <section class="nyhedsbrev-forside" aria-label="nyhedsbrev-overskrift">
+            <h3 id="nyhedsbrev-forside-overskrift">Træt af at mangle idéer når sulten rammer?</h3>
+            <p>Få simple og lækre ideer sendt direkte til din indbakke, så du aldrig står og stirrer tomt ind i
+                køleskabet igen</p>
+            <form class="nyhedsbrev-forside-form" action="#">
+                <div class="form-row">
+                    <div class="form-field">
+                        <label for="nb-email"></label>
+                        <input id="nb-email" name="email" type="email" autocomplete="email" required
+                            placeholder="Skriv e-mailadresse her..." />
+                        <p class="field-hint" id="hint-email" hidden>Indtast en gyldig email (fx navn@domæne.dk).</p>
+                    </div>
+                </div>
+                <div class="btn-nyhedsbrev-forside-wrap">
+                    <button type="submit" class="btn-nyhedsbrev-forside">Tilmeld dig nu</button>
+                </div>
+            </form>
+        </section>
+        <div class="image-gallery">
+            <img src="./assets/img/Billeder/gluten-free-chocolate-chip-cookies_large.jpeg" alt="">
+            <img src="./assets/img/Billeder/baked-kale-chips_large.jpeg" alt="">
+            <img src="./assets/img/Billeder/sugar-and-spice-granola_large.jpeg" alt="">
+            <img src="./assets/img/Billeder/pineapple-strawberry-salad_large.jpeg" alt="">
+            <img src="./assets/img/Billeder/quinoa-burrito-bowl_large.jpeg" alt="">
+            <img src="./assets/img/Billeder/basil-pesto_large.jpeg" alt="">
+            <img src="./assets/img/Billeder/french-yogurt-cake_large.jpeg" alt="">
+            <img src="./assets/img/Billeder/pumpkin-spice-donuts.webp" alt="">
+        </div>
+        <div class="socialmedias">
+            <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"><i class="fa-brands fa-pinterest"></i></a>
+            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+        </div>
+    </footer>
+</body>
+
+</html>
