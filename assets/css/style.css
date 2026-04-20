@@ -177,11 +177,20 @@ footer {
 }
 
 
+.image-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    width: 100%;
+    gap: 10px;
+}
+
 .image-gallery img {
-    width: 180px;
-    height: 180px;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
-    margin-top: var(--largeGap);
+    display: block;
+    padding-bottom: var(--smallGap);
+    padding-top: var(--smallGap);
 }
 
 .socialmedias {
@@ -225,38 +234,39 @@ footer {
 
 .opskrifter-main {
     padding: 3rem 10rem;
-    background-color: var(--beige);
+    background-color: var(--white);
     min-height: 100vh;
 }
 
 .opskrifter-title {
     font-family: var(--mainFont);
-    font-size: 2.5rem;
-    margin-bottom: 2rem;
+    font-size: 2rem;
+    margin: var(--largeGap);
     color: var(--black);
+    text-align: center;
 }
 
 .recipe-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 2rem;
+    gap: var(--smallGap);
+    margin-bottom: var(--largeGap);
 }
 
 .recipe-card {
-    background-color: var(--white);
-    border-radius: 12px;
     overflow: hidden;
     text-decoration: none;
     color: var(--black);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    box-shadow: 6px 6px 0 var(--lightBlue);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     display: flex;
     flex-direction: column;
+    text-align: center;
 }
 
 .recipe-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.14);
+    box-shadow: 6px 6px 0 var(--lightBlue);
 }
 
 .recipe-card-img-wrap {
@@ -299,6 +309,10 @@ footer {
     font-size: 1.1rem;
     margin: 0;
     color: var(--black);
+}
+
+.recipe-card-body p {
+    font-family: var(--subFont);
 }
 
 @media (max-width: 1200px) {
@@ -435,12 +449,6 @@ footer {
     transform: rotate(90deg);
 }
 
-/* INDGREDIENSER OG FREMGANGSMØÅDE */
-.second-section {
-    display: grid;
-    grid-template-columns: 500px 500px;
-}
-
 .print-recipe {
     grid-column: 1;
     width: 100px;
@@ -488,14 +496,9 @@ footer {
     background-color: black;
 }
 
-#servings-eggs,
-#cookingtime-eggs {
+#servings,
+#cookingtime {
     font-size: 1.5rem;
-}
-
-/* TIPS SEKTIONEN */
-.tips {
-    background: var(--lightBlue);
 }
 
 /* OPSKRIFTSAMLING*/
