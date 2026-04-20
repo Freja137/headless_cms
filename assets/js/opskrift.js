@@ -128,8 +128,6 @@ if (window.location.pathname.includes("recipe")) {
     getPostById(slug).then((sko) => renderRecipe(sko));
 }
 
-
-
 function renderRecipe(post) {
 
 
@@ -147,7 +145,7 @@ function renderRecipe(post) {
         // The field is an object with keys trin_1, trin_2, ... trin_N; filter out empty strings
         const fremgangsmadeRaw = post.acf.fremgangsmade;
         let stepsHtml = "";
-        if (fremgangsmadeRaw && typeof fremgangsmadeRaw === "object" && !Array.isArray(fremgangsmadeRaw)) {
+        /* if (fremgangsmadeRaw && typeof fremgangsmadeRaw === "object" && !Array.isArray(fremgangsmadeRaw)) {
             const steps = Object.values(fremgangsmadeRaw).filter(v => typeof v === "string" && v.trim() !== "");
             if (steps.length > 0) {
                 stepsHtml = `<h2>Fremgangsmåde:</h2><ol>${steps.map(step => `<li>${step}</li>`).join("")}</ol>`;
@@ -157,30 +155,74 @@ function renderRecipe(post) {
         } else if (Array.isArray(fremgangsmadeRaw) && fremgangsmadeRaw.length > 0) {
             stepsHtml = `<h2>Fremgangsmåde:</h2><ol>${fremgangsmadeRaw.filter(s => s && s.trim() !== "").map(step => `<li>${step}</li>`).join("")}</ol>`;
         }
+ */
+
+        if (
+            fremgangsmadeRaw &&
+            typeof fremgangsmadeRaw === "object" &&
+            !Array.isArray(fremgangsmadeRaw)
+        ) {
+            const steps = Object.values(fremgangsmadeRaw).filter(
+                v => typeof v === "string" && v.trim() !== ""
+            );
+
+            if (steps.length > 0) {
+                stepsHtml = `
+              <h2>Fremgangsmåde:</h2>
+              <div class="steps-list">
+                ${steps.map(step => `
+                  <label class="step-item">
+                    <input type="checkbox">
+                    <span>${step}</span>
+                  </label>
+                `).join("")}
+              </div>
+            `;
+            }
+        }
+
+
 
         containerEl.innerHTML +=
             `<article>
             <h2 class = "titelRecipe">${post.acf.titel}</h2>
+            <div class="recipe-top">
                 <img src="${post.acf.primaert_billede.sizes.medium_large}" class = "image-Recipe"></img>
-                <p>${post.acf.beskrivelse}</p>
-            <div class="ikoner">
-                <span><i class="fa-regular fa-bookmark"></i> Gem</span>
-                <span><i class="fa-solid fa-plus"></i> Føj til indkøbsliste</span>
+
+                <div class = "recipe-text">
+                    <p>${post.acf.beskrivelse}</p>
+
+                    <div class="ikoner">
+                        <span><i class="fa-regular fa-bookmark"></i> Gem</span>
+                        <span><i class="fa-solid fa-plus"></i> Føj til indkøbsliste</span>
+                    </div>
+                </div>
+                
             </div>
             <div class = "filter-icons">
-                <span><i class="fa-regular fa-clock" id = "cookingtime"></i>30 - 45 min</span>
-                <span><i class="fa-regular fa-user" id = "servings"></i>2 pers</span>
-                <span><img src="../assets/img/chef_hat.png" class = "chef-hat"> Øvet</img></span>
-            </div>
-  <h2>Ingredienser:</h2>
-  <ul>
-      ${ingredients.map(ing => `<li>${ing}</li>`).join("")}
-  </ul>
-  ${stepsHtml}
-  <p class="author">${post.acf.forfatter?.[0]?.post_title ?? ""}</p>
-  <button class = "print-recipe"><i class="fa-solid fa-print"></i>Udskriv</button>
+                <span><i class="fa-regular fa-clock" id = "cookingtime"></i>${post.acf.tilberedningstid[0].name}</span >
+                <span><i class="fa-solid fa-utensils" id = "servings"></i>${post.acf.antal_portioner}</span>
+                <span><img src="../assets/img/chef_hat.png" class = "chef-hat">${post.acf.svaerhedsgrad[0].name}</img></span>
+            </div >
+            <div class = "recipe-bottom">
 
-</article>`
+                <div class = "ingredients">
+                    <h2>Ingredienser:</h2>
+                    <ul>${ingredients.map(ing => `<li>${ing}</li>`).join("")}</ul>
+                     <button class = "print-recipe"><i class="fa-solid fa-print"></i>Udskriv</button>
+                </div>
+
+                <div class = "steps">
+                    ${stepsHtml}
+                </div>
+            
+            </div>
+            <article class = "tips-section">
+                <h3>Tips:</h3>
+                <p>${post.acf.tips}</p>
+            </article>
+
+</article > `
     })
 
 }
