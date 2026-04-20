@@ -38,10 +38,7 @@ html {
     justify-content: space-between;
     display: flex;
     align-items: center;
-
 }
-
-
 
 .name {
     color: var(--orange);
@@ -257,16 +254,15 @@ footer {
     overflow: hidden;
     text-decoration: none;
     color: var(--black);
-    box-shadow: 6px 6px 0 var(--lightBlue);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     display: flex;
     flex-direction: column;
     text-align: center;
+    background: var(--beige);
 }
 
 .recipe-card:hover {
     transform: translateY(-4px);
-    box-shadow: 6px 6px 0 var(--lightBlue);
 }
 
 .recipe-card-img-wrap {
@@ -338,6 +334,8 @@ footer {
 }
 
 /* Freja start her */
+/* BREADCRUMB */
+/* Hardcodet breadcrum, ville gerne have lavet den dynamisk ved at bruge javascript*/
 .breadcrumb ul {
     display: flex;
     list-style: none;
@@ -355,36 +353,37 @@ footer {
         color: var(--white);
         border-radius: 12px;
     }
-
-
 }
 
-/* Freja start her */
-
-/* BREADCRUMB */
-.breadcrumb ul {
+.recipe-top {
     display: flex;
-    list-style: none;
-    gap: 15px;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--subFont);
-    font-size: x-small;
-    padding: var(--largeGap) 0;
     margin: 0;
+    padding-left: 15rem;
+    padding-right: 15rem;
+    gap: var(--smallGap);
+    justify-content: center;
+}
 
-    li {
-        background: var(--darkBlue);
-        padding: 8px;
-        color: var(--white);
-        border-radius: 12px;
-    }
+.recipe-text p {
+    font-family: var(--subFont);
+}
 
+.ingredients h2 {
+    font-family: var(--mainFont);
+}
+
+.ingredients li {
+    padding: 0;
+    margin-left: 0;
+    margin-bottom: 1rem;
+    font-family: var(--subFont);
+    line-height: 1.5;
+    font-size: 1rem;
 }
 
 /* TITEL PÅ OPSKRIFT SIDE */
 .titelRecipe {
-    Display: flex;
+    display: flex;
     justify-content: center;
     font-family: var(--mainFont);
     font-size: 2rem;
@@ -393,24 +392,10 @@ footer {
     padding-bottom: var(--largeGap);
 }
 
-/* BILLEDE OG TEKST PÅ OPSKRIFT SIDE */
+/* BILLEDE PÅ OPSKRIFT SIDE */
 .image-Recipe {
     width: 500px;
     height: auto;
-}
-
-.picture-section,
-.second-section {
-    display: grid;
-    grid-template-columns: 500px 500px;
-    gap: var(--largeGap);
-    margin: 0;
-    padding: 0;
-    justify-content: center;
-}
-
-.tekst-section p {
-    font-family: var(--subFont);
 }
 
 /* GEM OG TILFØJ TIL INDKØBSLISTE IKONER */
@@ -422,9 +407,11 @@ footer {
     font-family: var(--subFont);
 }
 
-.titel-ingredients,
 .steps {
     margin: 0;
+}
+
+.steps h2 {
     font-family: var(--mainFont);
     font-size: 1.5rem;
 }
@@ -450,13 +437,13 @@ footer {
 }
 
 .print-recipe {
-    grid-column: 1;
     width: 100px;
     padding: 10px;
     background: var(--orange);
     color: var(--white);
     border-radius: 8px;
     border: none;
+    margin-top: var(--largeGap);
 }
 
 .print-recipe:hover {
@@ -464,7 +451,7 @@ footer {
     background: var(--darkBlue);
 }
 
-/* FILTER IKONERNE  */
+/* IKONERNE I MIDTEN  */
 .filter-icons {
     display: flex;
     align-items: center;
@@ -499,6 +486,52 @@ footer {
 #servings,
 #cookingtime {
     font-size: 1.5rem;
+}
+
+.recipe-bottom {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    padding: var(--smallGap);
+    margin-left: 15rem;
+    margin-right: 15rem;
+    border-radius: 8px;
+}
+
+.step-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    font-family: var(--subFont);
+    font-size: 1rem;
+}
+
+.step-item input {
+    margin-top: 0.2rem;
+}
+
+.step-item input:checked+span {
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+
+.tips-section {
+    background: var(--lightBlue);
+    border-radius: 15px;
+    margin: 5rem 15rem;
+    padding: 25px;
+
+    p {
+        font-family: var(--subFont);
+        color: var(--black);
+    }
+
+    h3 {
+        font-family: var(--mainFont);
+        color: var(--orange);
+    }
 }
 
 /* OPSKRIFTSAMLING*/
