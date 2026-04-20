@@ -1,8 +1,43 @@
 const baseUrl = "https://test.albertefriis.dk/wp-json/";
 const postsUrl = "wp/v2/posts/?per_page=100&acf_format=standard";
-/* 
+
 const params = new URLSearchParams(window.location.search);
 
+// Mapping from HTML filename (without .html) to WordPress post slug
+const slugMap = {
+    "appledonut": "donuts-med-aeble",
+    "applesalad": "frisk-aeble-og-valnoed-salat",
+    "avocado": "grillede-sandwich-m-avocado-groenkaal-og-pesto",
+    "banana": "hjemmelavede-bananchips",
+    "bowl": "quinoa-burrito-bowl",
+    "chorizo": "staerk-soja-chorizo-roeraeg",
+    "cookies": "glutenfri-chocolate-chip-cookies",
+    "cornbread": "glutenfri-majs-broed",
+    "cupcakes": "jordbaer-milkshake-cupcakes",
+    "eggs": "scramble-eggs",
+    "granola": "sukker-og-krydderi-og-alt-muligt-laekkert-granola",
+    "greensoup": "groentsags-suppe",
+    "kale": "bagte-groenkaalschips",
+    "lasagne": "lasagne",
+    "lemoncake": "smaa-citron-kager",
+    "lemoncurd": "hjemmelavet-lemon-curd",
+    "macncheese": "mac-and-cheese",
+    "meatball": "spaghetti-og-koedboller",
+    "nugget": "hjemmelavet-chicken-nuggets",
+    "pestopasta": "basilikumspesto-pasta",
+    "pineapple": "ananas-jordbaersalat",
+    "pizza": "margherita-pizza-napoletana-style",
+    "pumpkindonut": "graeskar-donuts",
+    "pumpkinpie": "graeskartaerte",
+    "ragu": "svampe-ragu",
+    "rolls": "overnight-cinnamon-rolls",
+    "sandwichbread": "glutenfri-sandwich-broed",
+    "sweetburrito": "soede-kartoffel-burritos",
+    "tikka": "vegetarisk-tikka-masala",
+    "turkeysoup": "kalkunnudelsuppe",
+    "vegchili": "vegetarisk-chili",
+    "yogcake": "fransk-yoghurt-kage"
+};
 
 function getAllPosts() {
     fetch(baseUrl + postsUrl)
@@ -13,10 +48,36 @@ function getAllPosts() {
         .catch(err => console.log("FEJL!", err))
 }
 
-getAllPosts()
+// Detect current page name from URL (e.g. "chorizo.html" → "chorizo")
+const pathParts = window.location.pathname.split("/");
+const filename = pathParts[pathParts.length - 1];
+const pageName = filename.replace(/\.html$/i, "").toLowerCase();
+
+console.log("pageName:", pageName);
+
+if (slugMap[pageName]) {
+    // Fetch the specific recipe by its WordPress slug
+    const wpSlug = slugMap[pageName];
+    console.log("Fetching slug:", wpSlug);
+    fetch(baseUrl + "wp/v2/posts/?acf_format=standard&slug=" + wpSlug)
+        .then(res => res.json())
+        .then(data => {
+            console.log("Recipe post data:", data);
+            if (data && data.length > 0) {
+                renderRecipe(data);
+            } else {
+                console.warn("No post found for slug:", wpSlug, "— falling back to all posts");
+                getAllPosts();
+            }
+        })
+        .catch(err => console.log("FEJL ved hentning af opskrift!", err));
+} else {
+    // No mapping found (e.g. opskriftsamling, index) — fall back to all posts
+    console.log("No slug mapping for page:", pageName, "— loading all posts");
+    getAllPosts();
+}
 
 async function getAllPostsByCategory(id) {
-
     try {
         const res = await fetch(baseUrl + postsUrl + "?acf_format=standard&categories=" + id, {
 
@@ -36,7 +97,7 @@ console.log(searchParams.get("foo"));
 
 if (window.location.pathname.includes("recipe")) {
     const slug = searchParams.get("id");
-    console.log("id:", id);
+    console.log("id:", slug);
     async function getPostById(id) {
         try {
             const res = await fetch(baseUrl + postsUrl + "?acf_format=standard&id=" + id, {
@@ -49,7 +110,7 @@ if (window.location.pathname.includes("recipe")) {
         }
 
     }
-    getPostById(id).then((sko) => renderRecipe(sko));
+    getPostById(slug).then((sko) => renderRecipe(sko));
 }
 
 
@@ -64,15 +125,24 @@ function renderRecipe(post) {
 
     post.forEach(post => {
 
-        let ingredients = [];
-        for (const key in post.acf.ingredienser) {
-            const value = post.acf.ingredienser[key];
-            if (value) {
+        const ingredients = Object.values(post.acf.ingredienser).filter(v => typeof v === "string" && v.trim() !== "");
+        console.log('ingredients:', ingredients);
 
-                ingredients.push(value)
+        // Extract fremgangsmade steps — API key is "fremgangsmade" (å → a)
+        // The field is an object with keys trin_1, trin_2, ... trin_N; filter out empty strings
+        const fremgangsmadeRaw = post.acf.fremgangsmade;
+        let stepsHtml = "";
+        if (fremgangsmadeRaw && typeof fremgangsmadeRaw === "object" && !Array.isArray(fremgangsmadeRaw)) {
+            const steps = Object.values(fremgangsmadeRaw).filter(v => typeof v === "string" && v.trim() !== "");
+            if (steps.length > 0) {
+                stepsHtml = `<h2>Fremgangsmåde:</h2><ol>${steps.map(step => `<li>${step}</li>`).join("")}</ol>`;
             }
+        } else if (typeof fremgangsmadeRaw === "string" && fremgangsmadeRaw.trim() !== "") {
+            stepsHtml = `<h2>Fremgangsmåde:</h2><p>${fremgangsmadeRaw}</p>`;
+        } else if (Array.isArray(fremgangsmadeRaw) && fremgangsmadeRaw.length > 0) {
+            stepsHtml = `<h2>Fremgangsmåde:</h2><ol>${fremgangsmadeRaw.filter(s => s && s.trim() !== "").map(step => `<li>${step}</li>`).join("")}</ol>`;
         }
-        console.log('ingredients:', ingredients)
+
         containerEl.innerHTML +=
             `<article>
             <h2>${post.acf.titel}</h2>
@@ -82,13 +152,11 @@ function renderRecipe(post) {
   <ul>
       ${ingredients.map(ing => `<li>${ing}</li>`).join("")}
   </ul>
-  <p class="author">${post.acf.forfatter[0].post_title}</p>
-  <button><a href="recipe.html?&slug=${post.slug}">Læs mere</a></button>
+  ${stepsHtml}
+  <p class="author">${post.acf.forfatter?.[0]?.post_title ?? ""}</p>
 </article>`
     })
 
 }
 
-
- */
 
