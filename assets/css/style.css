@@ -207,7 +207,496 @@ footer {
     color: var(--orange);
 }
 
+
 /* Alberte start her */
+
+.headerPhoto {
+    width: 100%;
+    height: 600px;
+    object-fit: cover;
+    object-position: center 30%;
+}
+
+.nyhedContainer {
+
+    h1 {
+        text-align: center;
+        padding-top: 2rem;
+    }
+
+    .nyhederForside {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4.5rem;
+        padding: var(--smallGap);
+
+        a {
+            text-decoration: none;
+            color: var(--black);
+        }
+
+        /* Hover effekt med scale på cardet*/
+
+        .nyhedOpskriftForside:hover img {
+            transform: scale(1.04);
+        }
+
+        .nyhedOpskriftForside {
+            background-color: var(--beige);
+            overflow: hidden;
+            border-radius: 4px;
+            margin-bottom: 2rem;
+
+            img {
+                width: 100%;
+                max-width: 400px;
+                height: 400px;
+                object-fit: cover;
+                margin: 0;
+                transition: transform 0.4s ease;
+            }
+
+            p {
+
+                font-family: var(--subFont);
+                font-size: 20px;
+                text-align: center;
+                margin: 0;
+                margin-top: .5rem;
+                font-weight: 500;
+            }
+
+            .timeNyhederP {
+                font-family: var(--subFont);
+                font-size: 12px;
+                text-align: center;
+                margin: 0;
+                padding-top: .5rem;
+                padding-bottom: 1rem;
+            }
+        }
+
+    }
+
+}
+
+/* start af vælg ud fra tid */
+
+.timeContainer {
+    background-color: var(--beige);
+    padding-bottom: var(--largeGap);
+
+
+    h2 {
+        text-align: center;
+        margin: 0;
+        padding-top: var(--smallGap);
+    }
+
+    p {
+        text-align: center;
+        margin: 0;
+        padding-top: 1rem;
+    }
+
+
+    .timecards {
+        display: flex;
+        justify-content: center;
+        gap: 3rem;
+
+        padding-top: var(--smallGap);
+
+        .timecard {
+            position: relative;
+            transition: 0.3s ease-in-out;
+        }
+
+        .timecard img {
+            width: 230px;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+
+        .timecard p {
+            position: absolute;
+            bottom: 100px;
+            left: 45px;
+            background-color: var(--beige);
+            opacity: 0.81;
+            padding: 2rem 2rem;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--orange);
+            font-weight: 600;
+        }
+
+    }
+
+    .timecard:hover {
+        transform: scale(1.1);
+    }
+}
+
+/* Slutter af valg af tid */
+
+
+/* Start med efterårets favoritter */
+.autumnContainer {
+    h2 {
+        text-align: center;
+        padding-top: 2rem;
+    }
+
+    .autumnCards {
+        display: flex;
+        justify-content: center;
+        gap: var(--largeGap);
+        padding-top: 2rem;
+        padding-left: var(--smallGap);
+        padding-right: var(--smallGap);
+
+
+
+        a {
+            text-decoration: none;
+            color: var(--black);
+        }
+
+
+        .autumnCard {
+            border-radius: 6px;
+
+            img {
+                width: 280px;
+                height: 300px;
+                object-fit: cover;
+                box-shadow: 6px 6px 0px 0px var(--lightBlue);
+                margin: 0px 6px 6px 0px;
+
+            }
+
+            p {
+                font-family: var(--subFont);
+                font-size: 18px;
+                text-align: center;
+                margin: 0;
+                font-weight: 500;
+
+            }
+
+            .autumnTime {
+                font-family: var(--subFont);
+                font-size: 12px;
+                text-align: center;
+                margin: 0;
+                padding-top: .5rem;
+                padding-bottom: 1rem;
+            }
+
+        }
+
+    }
+
+    .knapForside {
+        padding: .5rem 2rem;
+        border: none;
+        color: white;
+        background-color: var(--orange);
+        font-family: var(--subFont);
+        font-size: 1rem;
+        font-weight: 600;
+        border-radius: 6px;
+        display: block;
+        margin: 0 auto;
+        margin-top: 3rem;
+        margin-bottom: var(--largeGap);
+        transition: background-color 0.3s ease;
+
+
+    }
+
+    .knapForside:hover {
+        background-color: var(--darkBlue);
+    }
+}
+
+/* Slut med efterårets favoritter */
+
+
+/* Starter med børnenes favoritter */
+
+.childrenContainer {
+    background-color: var(--darkBlue);
+    height: 85vh;
+
+    h2 {
+        text-align: center;
+        padding-top: 2rem;
+        color: #FFFFFF;
+    }
+
+    p {
+        text-align: center;
+        color: #FFFFFF;
+    }
+
+    .childrenCards {
+        display: flex;
+        justify-content: center;
+        gap: var(--largeGap);
+        padding-top: 2rem;
+        padding-left: var(--smallGap);
+        padding-right: var(--smallGap);
+
+
+        a {
+            text-decoration: none;
+            color: var(--black);
+        }
+
+
+        .childCard {
+
+
+            img {
+                width: 280px;
+                height: 300px;
+                object-fit: cover;
+                box-shadow: 6px 6px 0px 0px var(--lightBlue);
+
+            }
+
+            p {
+                font-family: var(--subFont);
+                font-size: 18px;
+                text-align: center;
+                margin: 0;
+                font-weight: 500;
+
+            }
+
+            .childTime {
+                font-family: var(--subFont);
+                font-size: 12px;
+                text-align: center;
+                margin: 0;
+                padding-top: .5rem;
+                padding-bottom: 1rem;
+            }
+
+        }
+    }
+
+    .knapForside {
+        padding: .5rem 2rem;
+        border: none;
+        color: white;
+        background-color: var(--orange);
+        font-family: var(--subFont);
+        font-size: 1rem;
+        font-weight: 600;
+        border-radius: 6px;
+        display: block;
+        margin: 0 auto;
+        margin-top: 3rem;
+        margin-bottom: var(--largeGap);
+        transition: background-color 0.3s ease;
+
+
+    }
+
+    .knapForside:hover {
+        background-color: var(--lightBlue);
+    }
+}
+
+/* Slutter med børnenes favoritter */
+
+/* starter med alle opskrifter */
+
+.allrecipesContainer {
+
+
+    .stregTekst {
+        display: flex;
+        align-items: center;
+        padding-top: 4rem;
+    }
+
+    .stregTekst::before,
+    .stregTekst::after {
+        content: "";
+        flex: 1;
+        border-bottom: 1px solid black;
+
+    }
+
+    .stregTekst span {
+        margin: 0px 20px;
+    }
+
+    p {
+        text-align: center;
+    }
+
+
+    .filterForside {
+        display: flex;
+        padding: var(--smallGap);
+        gap: 5rem;
+        justify-content: center;
+        align-items: flex-start;
+
+
+        .timeFilter,
+        .allergiesFilter,
+        .preferenceFilter,
+        .seasonFilter {
+
+            border: 2px solid var(--orange);
+
+
+            button {
+                width: 200px;
+                padding: 1rem 2rem;
+                border: none;
+                border-bottom: 2px solid var(--orange);
+                color: var(--orange);
+                background-color: var(--white);
+                font-family: var(--subFont);
+                font-weight: 600;
+            }
+
+            ul {
+                list-style: none;
+                padding: 1rem;
+                display: none;
+            }
+        }
+
+        .timeFilter ul.open,
+        .allergiesFilter ul.open,
+        .preferenceFilter ul.open,
+        .seasonFilter ul.open {
+            display: block;
+        }
+
+    }
+
+}
+
+
+
+
+
+.allrecipes {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    justify-content: center;
+    gap: var(--largeGap);
+    padding-top: 2rem;
+    padding-left: var(--smallGap);
+    padding-right: var(--smallGap);
+
+
+    a {
+        text-decoration: none;
+        color: var(--black);
+    }
+
+    .numbRecipe {
+
+
+        img {
+            width: 280px;
+            height: 300px;
+            object-fit: cover;
+            box-shadow: 6px 6px 0px 0px var(--lightBlue);
+            margin: 0px 6px 6px 0px;
+
+        }
+
+        p {
+            font-family: var(--subFont);
+            font-size: 18px;
+            text-align: center;
+            margin: 0;
+            font-weight: 500;
+
+        }
+
+        .childTime {
+            font-family: var(--subFont);
+            font-size: 12px;
+            text-align: center;
+            margin: 0;
+            padding-top: .5rem;
+            padding-bottom: 1rem;
+        }
+
+    }
+
+
+}
+
+.loadKnap {
+    padding: .5rem 2rem;
+    border: none;
+    color: white;
+    background-color: var(--orange);
+    font-family: var(--subFont);
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 6px;
+    display: block;
+    margin: 0 auto;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    transition: background-color 0.3s ease;
+}
+
+.loadKnap:hover {
+    background-color: var(--darkBlue);
+}
+
+
+
+a.numbRecipeHidden {
+    display: none;
+
+    img {
+        width: 280px;
+        height: 300px;
+        object-fit: cover;
+        box-shadow: 6px 6px 0px 0px var(--lightBlue);
+
+    }
+
+    p {
+        font-family: var(--subFont);
+        font-size: 1.25rem;
+        text-align: center;
+        margin: 0;
+        font-weight: 500;
+
+    }
+
+    .childTime {
+        font-family: var(--subFont);
+        font-size: 1rem;
+        text-align: center;
+        margin: 0;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+
+}
+
 
 /* Morten start her */
 
