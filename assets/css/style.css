@@ -423,6 +423,11 @@ footer {
     .knapForside:hover {
         background-color: var(--darkBlue);
     }
+
+    .knapForside a {
+        text-decoration: none;
+        color: var(--white);
+    }
 }
 
 /* Slut med efterårets favoritter */
@@ -512,6 +517,11 @@ footer {
 
     .knapForside:hover {
         background-color: var(--lightBlue);
+    }
+
+    .knapForside a {
+        color: var(--white);
+        text-decoration: none;
     }
 }
 
