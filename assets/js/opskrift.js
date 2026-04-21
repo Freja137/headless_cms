@@ -64,7 +64,7 @@ function getAllPosts() {
         .catch(err => alert("Hov der skete en fejl!"))
 }
 
-// Detect current page name from URL (e.g. "chorizo.html" → "chorizo")
+
 //window.location.pathname henter URL-stien — f.eks. /opskrifter/pasta.html og .split("/") splitter stien op ved hver / og laver et array: ["", "opskrifter", "pasta.html"]
 const pathParts = window.location.pathname.split("/");
 
@@ -159,8 +159,6 @@ function renderRecipe(post) {
               </div>
             `;
         }
-
-
 
         containerEl.innerHTML +=
             `<article>
