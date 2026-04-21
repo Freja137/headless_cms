@@ -13,6 +13,7 @@ document.addEventListener("mouseout", function (e) {
         span.querySelector("i").classList.replace("fa-solid", "fa-regular");
     }
 });
+
 const baseUrl = "https://test.albertefriis.dk/wp-json/";
 const postsUrl = "wp/v2/posts/?per_page=100&acf_format=standard";
 
@@ -60,115 +61,93 @@ function getAllPosts() {
         .then(data => {
             renderRecipe(data);
         })
-        .catch(err => console.log("FEJL!", err))
+        .catch(err => alert("Hov der skete en fejl!"))
 }
 
 // Detect current page name from URL (e.g. "chorizo.html" → "chorizo")
+//window.location.pathname henter URL-stien — f.eks. /opskrifter/pasta.html og .split("/") splitter stien op ved hver / og laver et array: ["", "opskrifter", "pasta.html"]
 const pathParts = window.location.pathname.split("/");
+
+// pathParts.length - 1 er indekset på det sidste element i arrayet. Så filename bliver fx "pasta.html".
 const filename = pathParts[pathParts.length - 1];
+
+// .replace(/\.html$/i, "") fjerner .html fra slutningen af filnavnet. 
 const pageName = filename.replace(/\.html$/i, "").toLowerCase();
 
-console.log("pageName:", pageName);
-
 if (slugMap[pageName]) {
-    // Fetch the specific recipe by its WordPress slug
+    // Fetch den specifikke opskrift via dens slug i wordpress.
     const wpSlug = slugMap[pageName];
-    console.log("Fetching slug:", wpSlug);
+
     fetch(baseUrl + "wp/v2/posts/?acf_format=standard&slug=" + wpSlug)
         .then(res => res.json())
         .then(data => {
-            console.log("Recipe post data:", data);
+
+            // hvis data er true og data.length er større end 0, køres det her statement.
             if (data && data.length > 0) {
                 renderRecipe(data);
             } else {
-                console.warn("No post found for slug:", wpSlug, "— falling back to all posts");
                 getAllPosts();
             }
         })
-        .catch(err => console.log("FEJL ved hentning af opskrift!", err));
+        .catch(err => alert("FEJL ved hentning af opskrift!", err));
 } else {
-    // No mapping found (e.g. opskriftsamling, index) — fall back to all posts
-    console.log("No slug mapping for page:", pageName, "— loading all posts");
     getAllPosts();
 }
 
 async function getAllPostsByCategory(id) {
     try {
-        const res = await fetch(baseUrl + postsUrl + "?acf_format=standard&categories=" + id, {
-
-        })
+        const res = await fetch(baseUrl + postsUrl + "?acf_format=standard&categories=" + id, {})
         const posts = await res.json();
         renderRecipe(posts);
     } catch (err) {
-        console.log("Fejl skete...", err)
+        alert("Fejl skete...", err)
     }
 }
 
+
 const paramsString = window.location.search;
-console.log('window.location:', window.location)
 const searchParams = new URLSearchParams(paramsString);
-console.log(searchParams.get("foo"));
 
 
 if (window.location.pathname.includes("recipe")) {
     const slug = searchParams.get("id");
-    console.log("id:", slug);
     async function getPostById(id) {
         try {
-            const res = await fetch(baseUrl + postsUrl + "?acf_format=standard&id=" + id, {
-
-            })
+            const res = await fetch(baseUrl + postsUrl + "?acf_format=standard&id=" + id, {})
             const posts = await res.json();
             return (posts);
         } catch (err) {
-            console.log("Fejl skete...", err)
+            alert("Fejl skete...", err)
         }
 
     }
-    getPostById(slug).then((sko) => renderRecipe(sko));
+    getPostById(slug).then((opskrift) => renderRecipe(opskrift));
 }
 
 function renderRecipe(post) {
-
-
     const containerEl = document.querySelector(".container");
     containerEl.innerHTML = "";
 
-    console.log('post', post);
-
     post.forEach(post => {
 
+        // Her henter vi alle values i et objekt, derefter filtrer vi det med .filter hvor vi tjekker om det inhold der kommer ud er en string og ikke er et tal osv. Til sidst bruger vi .trim for at sikre os at der er indhold i objekt, så der ikke kommer tomme listepunkter på siden.
         const ingredients = Object.values(post.acf.ingredienser).filter(v => typeof v === "string" && v.trim() !== "");
-        console.log('ingredients:', ingredients);
 
-        // Extract fremgangsmade steps — API key is "fremgangsmade" (å → a)
-        // The field is an object with keys trin_1, trin_2, ... trin_N; filter out empty strings
+        //definerer en variabel for fremgangsmåden.
         const fremgangsmadeRaw = post.acf.fremgangsmade;
         let stepsHtml = "";
-        /* if (fremgangsmadeRaw && typeof fremgangsmadeRaw === "object" && !Array.isArray(fremgangsmadeRaw)) {
-            const steps = Object.values(fremgangsmadeRaw).filter(v => typeof v === "string" && v.trim() !== "");
-            if (steps.length > 0) {
-                stepsHtml = `<h2>Fremgangsmåde:</h2><ol>${steps.map(step => `<li>${step}</li>`).join("")}</ol>`;
-            }
-        } else if (typeof fremgangsmadeRaw === "string" && fremgangsmadeRaw.trim() !== "") {
-            stepsHtml = `<h2>Fremgangsmåde:</h2><p>${fremgangsmadeRaw}</p>`;
-        } else if (Array.isArray(fremgangsmadeRaw) && fremgangsmadeRaw.length > 0) {
-            stepsHtml = `<h2>Fremgangsmåde:</h2><ol>${fremgangsmadeRaw.filter(s => s && s.trim() !== "").map(step => `<li>${step}</li>`).join("")}</ol>`;
-        }
- */
 
-
+        // Hej tjekker vi om der er indhold i vores ovenstående variabel, derefter om indholdet er et objekt og til sidst tjekker den om indholdet er et array eller ej. Hvis det er, kører den ikke. Der bruges && for at tjekke om alle "statements" er true.
         if (
             fremgangsmadeRaw &&
             typeof fremgangsmadeRaw === "object" &&
             !Array.isArray(fremgangsmadeRaw)
         ) {
             const steps = Object.values(fremgangsmadeRaw).filter(
-                v => typeof v === "string" && v.trim() !== ""
+                e => typeof e === "string" && e.trim() !== ""
             );
 
-            if (steps.length > 0) {
-                stepsHtml = `
+            stepsHtml = `
               <h2>Fremgangsmåde:</h2>
               <div class="steps-list">
                 ${steps.map(step => `
@@ -179,7 +158,6 @@ function renderRecipe(post) {
                 `).join("")}
               </div>
             `;
-            }
         }
 
 
@@ -222,7 +200,6 @@ function renderRecipe(post) {
                 <h3>Tips:</h3>
                 <p>${post.acf.tips}</p>
             </article>
-
 </article > `
     })
 
