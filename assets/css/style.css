@@ -172,7 +172,7 @@ footer {
 .image-gallery {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    width: 100%;
+    max-width: 100%;
     gap: 10px;
 }
 
@@ -432,7 +432,7 @@ footer {
 
 .childrenContainer {
     background-color: var(--darkBlue);
-    height: 85vh;
+    padding-bottom: 25px;
 
     h2 {
         text-align: center;
@@ -504,7 +504,6 @@ footer {
         display: block;
         margin: 0 auto;
         margin-top: 3rem;
-        margin-bottom: var(--largeGap);
         transition: background-color 0.3s ease;
 
 
