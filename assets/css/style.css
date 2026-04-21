@@ -203,6 +203,14 @@ footer {
     color: var(--orange);
 }
 
+p {
+    font-family: var(--subFont);
+}
+
+h3 {
+    font-family: var(--mainFont);
+}
+
 
 /* Alberte start her */
 
@@ -301,7 +309,7 @@ footer {
     .timecards {
         display: flex;
         justify-content: center;
-        gap: 3rem;
+        gap: 2rem;
 
         padding-top: var(--smallGap);
 
@@ -311,7 +319,7 @@ footer {
         }
 
         .timecard img {
-            width: 100%;
+            width: 250px;
             height: 280px;
             object-fit: cover;
             border-radius: 6px;
@@ -320,7 +328,7 @@ footer {
         .timecard p {
             position: absolute;
             bottom: 100px;
-            left: 32px;
+            left: 35px;
             background-color: var(--beige);
             opacity: 0.81;
             padding: 2rem 2rem;
@@ -330,12 +338,13 @@ footer {
             gap: 0.5rem;
             color: var(--orange);
             font-weight: 600;
+
         }
 
     }
 
     .timecard:hover {
-        transform: scale(1.1);
+        transform: scale(1.05);
     }
 }
 
