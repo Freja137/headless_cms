@@ -52,12 +52,6 @@ html {
     gap: 10px;
 }
 
-.name img {
-    width: 45px;
-    height: auto;
-    transform: rotate(13deg);
-}
-
 .nav-list {
     font-family: "DM Sans", sans-serif;
     display: flex;
@@ -315,7 +309,7 @@ footer {
         }
 
         .timecard img {
-            width: 230px;
+            width: 100%;
             height: 280px;
             object-fit: cover;
             border-radius: 6px;
@@ -373,11 +367,10 @@ footer {
             border-radius: 6px;
 
             img {
-                width: 280px;
+                width: 100%;
                 height: 300px;
                 object-fit: cover;
                 box-shadow: 6px 6px 0px 0px var(--lightBlue);
-                margin: 0px 6px 6px 0px;
 
             }
 
@@ -470,7 +463,7 @@ footer {
 
 
             img {
-                width: 280px;
+                width: 100%;
                 height: 300px;
                 object-fit: cover;
                 box-shadow: 6px 6px 0px 0px var(--lightBlue);
@@ -624,7 +617,7 @@ footer {
 
 
         img {
-            width: 280px;
+            width: 100%;
             height: 300px;
             object-fit: cover;
             box-shadow: 6px 6px 0px 0px var(--lightBlue);
@@ -681,7 +674,7 @@ a.numbRecipeHidden {
     display: none;
 
     img {
-        width: 280px;
+        width: 100%;
         height: 300px;
         object-fit: cover;
         box-shadow: 6px 6px 0px 0px var(--lightBlue);
