@@ -8,6 +8,7 @@
 body {
     margin: 0;
     line-height: 1.5;
+    max-width: 100%;
 }
 
 :root {
@@ -318,7 +319,7 @@ footer {
         .timecard p {
             position: absolute;
             bottom: 100px;
-            left: 45px;
+            left: 32px;
             background-color: var(--beige);
             opacity: 0.81;
             padding: 2rem 2rem;
